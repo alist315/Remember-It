@@ -1,0 +1,31 @@
+.modal {
+    background-color: #05400B;
+    position: fixed;
+    margin: 0 10vw;
+    padding-top: 3em;
+    top: 3em;
+    left: 0;
+    height: 80%;
+    width: 80%;
+    z-index: 2;
+    overflow: auto;
+    display : none;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 10px;
+    border: 5px solid #A9A9A9;
+}
+.modal-form {
+    padding: 20px;
+}
+.edit {
+    display: block;
+}
+.title-tag-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+}
+.edit-text-content {
+    height: 50vh;
+}

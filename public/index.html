@@ -1,31 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="RememberIt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
-  <script src="/Js/app.js" charset="utf-8"></script>
   <script src="js/lib/angular.js"></script>
   <script src="js/lib/angular-animate.js"></script>
-  <link rel="stylesheet" href="/Css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" charset="utf-8"></script>
+  <script src="/Js/app.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/css/style.css">
   <title>Remember It</title>
 </head>
-<header>
 
-  <h1> REMEMBER IT!</h1>
-</header>
-<body ng-controller ="mainController as ctrl">
+<body ng-controller='MainController as ctrl'>
+  <div class="modal" ng-class="(ctrl.showLogin ? 'edit' : '')">
+    <div class="modal-form">
+      <div class="row">
+        <div class="title-tag-row">
+          <button ng-click="ctrl.closeLogin()">X</button>
+          <div ng-controller="AuthController as auth">
+            <h2>Create User</h2>
+            <form ng-submit="auth.createUser()">
+              <input type="text" ng-model="auth.createUsername" />
+              <input type="password" ng-model="auth.createPassword" />
+              <input type="submit" value="Create User" />
+            </form>
+            <h2>Log In</h2>
+            <form ng-submit="auth.logIn()">
+              <input type="text" ng-model="auth.loginUsername" />
+              <input type="password" ng-model="auth.loginPassword" />
+              <input type="submit" value="Log In">
+            </form>
+            <form ng-submit="auth.logOut()">
+              <input type="submit" value=" Logout">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <header>
 
+    <h1> REMEMBER IT!</h1>
+  </header>
+  <div class="memos">
+     <h2>Your Memories</h2>
+    <form ng-submit="ctrl.createMemory()">
+      Name Of Event: <input ng-model="ctrl.nameOfEvent" type="text" placeholder="Name of Event">
+      Date: <input ng-model="ctrl.date" type="date" placeholder="Date">
+      Pics: <input ng-model="ctrl.img" type="text" placeholder="Pictures">
+      Description: <textarea ng-model="ctrl.description" type="text" placeholder="Description"></textarea>
+<input type="submit" value="Add New Memory">
+</form>
+<div ng-repeat="memory in ctrl.memories" ng-class="mems">
+<h3>{{ memory.nameOfEvent }}</h3>
+<h3>{{ memory.date }}</h3>
+<img src="{{ memory.img }}" alt="pics" />
+<h3> {{ memory.description }} </h3>
 
+<!-- <h3>Url: {{ bookmark.url }}</h3> -->
+<button ng-click="ctrl.deleteMemory(memory)">X</button>
+<form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editMemory(memory)">
+  <input type="text" ng-model="ctrl.updatedNameOfEvent" placeholder="Name of Event">
+  <input type="text" ng-model="ctrl.updatedDate" placeholder="Date">
+  <input type="text" ng-model="ctrl.updatedImg" placeholder="Pictures">
+  <input type="text" ng-model="ctrl.updatedDescription" placeholder="Description">
+  <input type="submit" value="Update!">
+</form>
+<a href="#" ng-click="ctrl.indexOfEditFormToShow = $index">Update!</a>
+</div>
+</div>
+</body>
 
-
-
-
-
-
-
-
-  </body>
-  </html>
+</html>
