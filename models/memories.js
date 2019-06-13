@@ -3,6 +3,7 @@ const memorySchema = new mongoose.Schema({
   nameOfEvent: String,
   date: Date,
   img: String,
+  location: String,
   description: String
 });
 

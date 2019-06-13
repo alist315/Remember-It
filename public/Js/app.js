@@ -1,5 +1,5 @@
-const app = angular.module('RememberIt', ['ngAnimate']);
-app.controller('mainController', ['$http', function($http) {
+const app = angular.module('RememberItApp', ['ngAnimate']);
+app.controller('MainController', ['$http','$scope', function($http, $scope) {
   const controller = this;
   this.memories=[];
   this.indexOfEditFormToShow = null;
@@ -11,6 +11,7 @@ app.controller('mainController', ['$http', function($http) {
         nameOfEvent: this.nameOfEvent,
         date: this.date,
         img: this.img,
+        location: this.location,
         description: this.description
       }
     }).then(function(response){
@@ -48,10 +49,11 @@ app.controller('mainController', ['$http', function($http) {
             method:'PUT',
             url: '/memories/' + memory._id,
             data: {
-              nameOfEvent: this.nameOfEvent,
-              date: this.date,
-              img: this.img,
-              description: this.description
+              nameOfEvent: this.updatedNameOfEvent,
+              date: this.updatedDatedate,
+              img: this.updatedImgimg,
+              location: this.updatedLocationlocation,
+              description: this.updatedDescriptiondescription
             }
         }).then(
             function(response){
@@ -64,6 +66,15 @@ app.controller('mainController', ['$http', function($http) {
         );
     }
 
+    this.openLogin = () => {
+         this.showLogin = true;
+         $scope.ctrl.showLogin = true;
+       }
+    // __________CLOSE MODAL_________________
+       this.closeLogin = () => {
+          this.showLogin = false;
+          $scope.ctrl.showLogin = false;
+        }
 
     this.getMemories();
   }]);
@@ -84,7 +95,7 @@ app.controller('mainController', ['$http', function($http) {
     this.goApp = function(){
       $http({
           method:'GET',
-          url: '/footballs'
+          url: '/memories'
       }).then(function(response){
           controller.loggedInUsername = response.data.username;
           console.log(response);
