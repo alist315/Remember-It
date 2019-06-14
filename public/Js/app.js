@@ -1,13 +1,17 @@
 const app = angular.module('RememberItApp', ['ngAnimate']);
+
 app.controller('MainController', ['$http','$scope', function($http, $scope) {
   const controller = this;
   this.memories=[];
   this.indexOfEditFormToShow = null;
+  this.foundUser = null;
+  this.loggedIn = false;
   this.createMemory = function(){
     $http({
       method: 'POST',
       url:'/memories',
       data:{
+        userId: controller.foundUser._id,
         nameOfEvent: this.nameOfEvent,
         date: this.date,
         img: this.img,
@@ -76,8 +80,8 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
           $scope.ctrl.showLogin = false;
         }
 
-    this.getMemories();
-  }]);
+
+
 
 
 
@@ -90,20 +94,7 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
 
 
 // auth controller
-  app.controller('AuthController', ['$http', function ($http){
-  const controller = this;
-    this.goApp = function(){
-      $http({
-          method:'GET',
-          url: '/memories'
-      }).then(function(response){
-          controller.loggedInUsername = response.data.username;
-          console.log(response);
-          console.log(controller.loggedInUsername);
-      }, function(){
-          console.log('error');
-      });
-  }
+
 
   this.test = "hello"
   console.log('running');
@@ -119,8 +110,7 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
             }
         }).then(function(response){
             console.log(response);
-            // controller.createUsername = null;
-            // controller.createPassword = null;
+
         }, function(){
             console.log('error');
         });
@@ -132,6 +122,8 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
       method: 'DELETE',
       url: '/sessions'
     }).then(function (response) {
+      controller.loggedIn = false;
+      controller.foundUser = null;
       console.log(response);
       // controller.loggedInUsername = null;
     }, function (error){
@@ -148,12 +140,15 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
               password: this.loginPassword
           }
       }).then(function(response){
-          console.log(response);
+          console.log(response.data.foundUser);
+          controller.foundUser = response.data.foundUser;
           controller.loginUsername = null;
           controller.loginPassword = null;
+          controller.loggedIn= true;
           // controller.goApp();
       }, function(){
           console.log('error');
       });
   }
+  this.getMemories();
 }]);

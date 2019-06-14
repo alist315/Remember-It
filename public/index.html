@@ -18,52 +18,49 @@
       <div class="row">
         <div class="title-tag-row">
           <button ng-click="ctrl.closeLogin()">X</button>
-          <div ng-controller="AuthController as auth">
             <h2>Create User</h2>
-            <form ng-submit="auth.createUser()">
-              <input type="text" ng-model="auth.createUsername" />
-              <input type="password" ng-model="auth.createPassword" />
+            <form ng-submit="ctrl.createUser()">
+              <input type="text" ng-model="ctrl.createUsername" />
+              <input type="password" ng-model="ctrl.createPassword" />
               <input type="submit" value="Create User" />
             </form>
             <h2>Log In</h2>
-            <form ng-submit="auth.logIn()">
-              <input type="text" ng-model="auth.loginUsername" />
-              <input type="password" ng-model="auth.loginPassword" />
+            <form ng-submit="ctrl.logIn()">
+              <input type="text" ng-model="ctrl.loginUsername" />
+              <input type="password" ng-model="ctrl.loginPassword" />
               <input type="submit" value="Log In">
             </form>
-            <form ng-submit="auth.logOut()">
-              <input type="submit" value=" Logout">
-            </form>
-            <!-- <h2>Go to "the app"</h2>
-                 <a href="#" ng-click="auth.goApp()">Click here</a>
-                 <div ng-if="auth.logggedInUsername">
-                    Welcome, {{ auth.logggedInUsername }}
-                  </div> -->
-          </div>
+            <button ng-click="ctrl.logOut()">Logout
+            </button>
         </div>
       </div>
     </div>
   </div>
 
   <header>
-
     <h1> REMEMBER IT!</h1>
     <a ng-if="!ctrl.user.logged " ng-click="ctrl.openLogin()" class="menuItem menuLink headerLink ng-scope" href="#">LOGIN</a>
   </header>
-  <div class="memos">
+
+  <div class="memos" ng-if="ctrl.loggedIn">
      <h2>Your Memories</h2>
+     <label for="Search by">
+	<input type='text' placeholder='Search' ng-model='searchBox'>
+</label>
+
     <form ng-submit="ctrl.createMemory()">
       Name Of Event: <input ng-model="ctrl.nameOfEvent" type="text" placeholder="Name of Event">
       Date: <input ng-model="ctrl.date" type="date" placeholder="Date">
-      Pics: <input ng-model="ctrl.img" type="text" placeholder="Pictures">
+      Pics: <input ng-model="ctrl.img" type="text" placeholder="Pictures"> <input ng-model="ctrl.img2" type="text" placeholder="Pictures">
       Location: <input ng-model="ctrl.location" type="text" placeholder="Location">
       Description: <textarea ng-model="ctrl.description" type="text" placeholder="Description"></textarea>
 <input type="submit" value="Add New Memory">
 </form>
-<div ng-repeat="memory in ctrl.memories" ng-class="mems">
+<div ng-repeat="memory in ctrl.memories | orderBy: 'date' | filter: searchBox" class="fade">
 <h3>{{ memory.nameOfEvent }}</h3>
-<h3>{{ memory.date }}</h3>
+<h3>{{ memory.date | date:'MM-dd-yyyy'}}</h3>
 <img src= "{{ memory.img }}" alt="pics" />
+<img src= "{{ memory.img2 }}" alt="pics" />
 <h3> {{ memory.location }} </h3>
 <h3> {{ memory.description }} </h3>
 

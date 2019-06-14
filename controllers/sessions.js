@@ -17,12 +17,13 @@ router.post('/', (req, res)=>{
     User.findOne({ username: req.body.username }, (err, foundUser)=>{
         if( bcrypt.compareSync(req.body.password, foundUser.password) ){
             req.session.currentUser = foundUser;
-            res.status(201).json({
+            res.json({
                 status:201,
-                message:'session created'
+                message:'session created',
+                foundUser: foundUser
             });
         } else {
-            res.status(401).json({
+            res.json({
                 status:401,
                 message:'login failed'
             });
