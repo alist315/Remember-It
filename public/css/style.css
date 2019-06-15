@@ -1,11 +1,36 @@
+body{
+  text-align: center;
+}
+html{
+  background-image: url(https://newevolutiondesigns.com/images/freebies/tropical-beach-background-22.jpg);
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+}
+#input {
+  margin-bottom: 5px;
+}
+
+h1:hover{
+color: skyblue;
+}
+h2:hover{
+  color: white;
+}
+
 .fade {
   transition: 1s linear all;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .fade.ng-enter {
   opacity: 0;
 }
-
+.imgur{
+  display: flex;
+  justify-content: space-evenly;
+}
 .fade.ng-enter.ng-enter-active {
   opacity: 1;
 }
@@ -14,19 +39,22 @@
   opacity: 1;
 }
 
+
 .fade.ng-leave.ng-leave-active {
   opacity: 0;
 }
-
+#int{
+  width: 15%;
+}
 .modal {
-    background-color: black;
+    background-color: skyblue;
     color: white;
     position: fixed;
     margin: 0 10vw;
     padding-top: 3em;
     top: 3em;
     left: 0;
-    height: 80%;
+    height: 60%;
     width: 50%;
     z-index: 2;
     overflow: auto;
@@ -34,7 +62,20 @@
     padding-left: 1em;
     padding-right: 1em;
     border-radius: 10px;
-    border: 5px solid #A9A9A9;
+    border: 5px solid white;
+}
+#img{
+  width: 400px;
+  height: 400px;
+}
+img{
+  border: 2px solid skyblue;
+  border-radius: 10px;
+  /* width: 40%;
+  height: 400px; */
+}
+a{
+  color: white;
 }
 .modal-form {
     padding: 20px;
@@ -49,4 +90,20 @@
 }
 .edit-text-content {
     height: 50vh;
+}
+.textarea{
+  resize: none;
+  margin-bottom: 5px;
+}
+footer{
+  background-color: skyblue;
+  color: white;
+}
+@media screen and (max-width: 800px){
+  #int{
+    margin-bottom: 5px;
+    text-align: center;
+    width: 45%;
+    display: block;
+  }
 }

@@ -15,6 +15,7 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
         nameOfEvent: this.nameOfEvent,
         date: this.date,
         img: this.img,
+        img2: this.img2,
         location: this.location,
         description: this.description
       }
@@ -55,9 +56,10 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
             data: {
               nameOfEvent: this.updatedNameOfEvent,
               date: this.updatedDatedate,
-              img: this.updatedImgimg,
-              location: this.updatedLocationlocation,
-              description: this.updatedDescriptiondescription
+              img: this.updatedImg,
+              img2: this.updatedImg2,
+              location: this.updatedLocation,
+              description: this.updatedDescription
             }
         }).then(
             function(response){

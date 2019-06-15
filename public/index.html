@@ -8,7 +8,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
   <script src="/Js/app.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+   <link rel="stylesheet" href="/css/style.css">
   <title>Remember It</title>
 </head>
 
@@ -17,65 +19,79 @@
     <div class="modal-form">
       <div class="row">
         <div class="title-tag-row">
-          <button ng-click="ctrl.closeLogin()">X</button>
-            <h2>Create User</h2>
+          <div class="control">
+          <button class="button is-primary" ng-click="ctrl.closeLogin()">X</button>
+            <h2 class="subtitle">Create User</h2>
             <form ng-submit="ctrl.createUser()">
-              <input type="text" ng-model="ctrl.createUsername" />
-              <input type="password" ng-model="ctrl.createPassword" />
-              <input type="submit" value="Create User" />
+              <input id="input"class="input is-rounded" type="text" ng-model="ctrl.createUsername" />
+              <input id="input" class="input is-rounded" type="password" ng-model="ctrl.createPassword" />
+              <button class="button is-primary">Create New User</button>
             </form>
-            <h2>Log In</h2>
+            <h2 class="subtitle">Log In</h2>
             <form ng-submit="ctrl.logIn()">
-              <input type="text" ng-model="ctrl.loginUsername" />
-              <input type="password" ng-model="ctrl.loginPassword" />
-              <input type="submit" value="Log In">
+              <input id="input" class="input is-rounded" type="text" ng-model="ctrl.loginUsername" />
+              <input id="input" class="input is-rounded" type="password" ng-model="ctrl.loginPassword" />
+              <button class="button is-primary">Log In</button>
             </form>
-            <button ng-click="ctrl.logOut()">Logout
+            <button class="button is-primary" ng-if="ctrl.loggedIn" ng-click="ctrl.logOut()">Logout
             </button>
+            </div>
         </div>
       </div>
     </div>
   </div>
 
   <header>
-    <h1> REMEMBER IT!</h1>
+    <h1 class="title"> REMEMBER IT!</h1>
     <a ng-if="!ctrl.user.logged " ng-click="ctrl.openLogin()" class="menuItem menuLink headerLink ng-scope" href="#">LOGIN</a>
   </header>
 
-  <div class="memos" ng-if="ctrl.loggedIn">
-     <h2>Your Memories</h2>
+  <div id="main"class="tile is-child notification is-primary" ng-if="ctrl.loggedIn">
+     <h2 class="subtitle">Your Memories</h2>
      <label for="Search by">
-	<input type='text' placeholder='Search' ng-model='searchBox'>
+	<input id="int" class="input is-rounded" type='text' placeholder='Search' ng-model='searchBox'>
 </label>
 
     <form ng-submit="ctrl.createMemory()">
-      Name Of Event: <input ng-model="ctrl.nameOfEvent" type="text" placeholder="Name of Event">
-      Date: <input ng-model="ctrl.date" type="date" placeholder="Date">
-      Pics: <input ng-model="ctrl.img" type="text" placeholder="Pictures"> <input ng-model="ctrl.img2" type="text" placeholder="Pictures">
-      Location: <input ng-model="ctrl.location" type="text" placeholder="Location">
-      Description: <textarea ng-model="ctrl.description" type="text" placeholder="Description"></textarea>
-<input type="submit" value="Add New Memory">
+      Name Of Event: <input id="int" class="input is-rounded" ng-model="ctrl.nameOfEvent" type="text" placeholder="Name of Event">
+      Date: <input id="int" class="input is-rounded" ng-model="ctrl.date" type="date" placeholder="Date">
+      Pics: <input id="int" class="input is-rounded" ng-model="ctrl.img" type="text" placeholder="Pictures"> <input id="int" class="input is-rounded" ng-model="ctrl.img2" type="text" placeholder="Pictures">
+      Location: <input id="int" class="input is-rounded" ng-model="ctrl.location" type="text" placeholder="Location">
+      Description: <textarea class="textarea" ng-model="ctrl.description" type="text" placeholder="Description"></textarea>
+<button class="button is-primary">Add New Memory</button>
 </form>
 <div ng-repeat="memory in ctrl.memories | orderBy: 'date' | filter: searchBox" class="fade">
 <h3>{{ memory.nameOfEvent }}</h3>
 <h3>{{ memory.date | date:'MM-dd-yyyy'}}</h3>
+<div class="imgur">
+<figure id="img"class="image is-128x128">
 <img src= "{{ memory.img }}" alt="pics" />
+</figure>
+<figure id="img"class="image is-128x128">
 <img src= "{{ memory.img2 }}" alt="pics" />
+</figure>
+</div>
 <h3> {{ memory.location }} </h3>
 <h3> {{ memory.description }} </h3>
 
-<button ng-click="ctrl.deleteMemory(memory)">X</button>
+<button class="button is-primary" ng-click="ctrl.deleteMemory(memory)">X</button>
 <form ng-if="$index === ctrl.indexOfEditFormToShow" ng-submit="ctrl.editMemory(memory)">
-  <input type="text" ng-model="ctrl.updatedNameOfEvent" placeholder="Name of Event">
-  <input type="date" ng-model="ctrl.updatedDate" placeholder="Date">
-  <input type="text" ng-model="ctrl.updatedImg" placeholder="Pictures">
-  <input type="text" ng-model="ctrl.updatedLocation" placeholder="Location">
-  <input type="text" ng-model="ctrl.updatedDescription" placeholder="Description">
-  <input type="submit" value="Update!">
+  <input id="int" class="input is-rounded" type="text" ng-model="ctrl.updatedNameOfEvent" placeholder="Name of Event">
+  <input id="int" class="input is-rounded" type="date" ng-model="ctrl.updatedDate" placeholder="Date">
+  <input  id="int" class="input is-rounded"type="text" ng-model="ctrl.updatedImg" placeholder="Pictures">
+  <input  id="int" class="input is-rounded" type="text" ng-model="ctrl.updatedImg2" placeholder="Pictures">
+  <input id="int" class="input is-rounded" type="text" ng-model="ctrl.updatedLocation" placeholder="Location">
+  <input id="int" class="input is-rounded" type="text" ng-model="ctrl.updatedDescription" placeholder="Description">
+  <button class="button is-primary">Update!</button>
 </form>
 <a href="#" ng-click="ctrl.indexOfEditFormToShow = $index">Update!</a>
 </div>
 </div>
+<footer ng-if="ctrl.loggedIn">
+  Copyright 2019
+        <br/>
+        Remember It Inc
+  <footer>
 </body>
 
 </html>
