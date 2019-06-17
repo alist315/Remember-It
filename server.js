@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
-const port = 3000;
 const mongoose = require('mongoose');
 const session = require('express-session');
 require('dotenv').config();
 const moment = require('moment');
 // const sass = require('sass');
-
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static('public'));
 app.use(session({
@@ -30,6 +29,6 @@ const sessionsController = require('./controllers/sessions.js');
 app.use('/sessions', sessionsController);
 
 
-app.listen(port, ()=>{
-    console.log('listening...');
+app.listen(PORT, ()=>{
+    console.log('listening on', PORT);
 });
