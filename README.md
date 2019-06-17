@@ -23,4 +23,4 @@ This app also allows the user to edit their memories but clicking the update but
 ##Improvements
 I would have loved to find a way that the user could add more photos maybe a drop down menu that added their photos to a carousel. Also would have liked to make the site more responsive it is responsive but maybe just a hair cleaner. I would have loved to do an about me page just couldn't figure it out. Also my login works but i couldn't figure out how to make the information custom to the user account created.
 
-Link to my app Remember It hosted on heroku: https://obscure-reaches-37506.herokuapp.com/
+Link to my app Remember It hosted on heroku: https://remember-it1.herokuapp.com/
