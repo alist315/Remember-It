@@ -152,5 +152,14 @@ app.controller('MainController', ['$http','$scope', function($http, $scope) {
           console.log('error');
       });
   }
+  this.seed = function(){
+    $http({
+      method:'GET',
+      url:'/users/userSeed',
+    }).then(function(response){
+      console.log(response);
+    })
+  }
   this.getMemories();
+  this.seed();
 }]);
